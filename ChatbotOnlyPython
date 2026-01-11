@@ -1,0 +1,32 @@
+
+!pip install groq
+import gradio as gr
+
+def chatbot_response(user_input):
+    user_input = user_input.lower()
+
+    if user_input == "hello":
+        return "Hi!"
+    elif user_input == "how are you":
+        return "I am fine, thanks."
+    elif user_input == "bye":
+        return "Goodbye!"
+    else:
+        return "Sorry, I do not understand."
+
+with gr.Blocks() as demo:
+    gr.Markdown("## Basic Chatbot")
+    gr.Markdown("Type simple messages like hello, how are you, or bye")
+
+    user_text = gr.Textbox(label="Your Message")
+    bot_reply = gr.Textbox(label="Bot Reply")
+
+    send_btn = gr.Button("Send")
+
+    send_btn.click(
+        chatbot_response,
+        inputs=user_text,
+        outputs=bot_reply
+    )
+
+demo.launch()
